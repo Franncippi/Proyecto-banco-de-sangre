@@ -64,3 +64,26 @@ print(df_solo_numeros[['ESTUDIODESCRIPCION', 'RESULTADO_NUMERICO']].head(10))
 # 5. Estadísticas rápidas de tus resultados numéricos
 print("\nResumen estadístico de los valores:")
 print(df_solo_numeros['RESULTADO_NUMERICO'].describe())
+
+import numpy as np
+
+# 1. Definimos los límites de los intervalos (los cortes)
+# Usamos np.inf para representar "más de 100"
+cortes = [0, 1, 2, 5, 10, 100, np.inf]
+
+# 2. Definimos los nombres que queremos que tengan esos grupos
+nombres = ['(0-1]', '(1-2]', '(2-5]', '(5-10]', '(10-100]', '>100']
+
+# 3. Creamos la nueva columna 'INTERVALO'
+df_solo_numeros['INTERVALO'] = pd.cut(df_solo_numeros['RESULTADO_NUMERICO'], bins=cortes, labels=nombres)
+
+# 4. Contamos cuántos hay en cada intervalo
+# .sort_index() sirve para que aparezcan ordenados de menor a mayor
+frecuencias = df_solo_numeros['INTERVALO'].value_counts().sort_index()
+
+print("Distribución de resultados por intervalos:")
+print(frecuencias)
+
+# 5. Opcional: Ver el porcentaje (muy útil para tu diplomatura)
+print("\nPorcentaje por intervalo (%):")
+print(df_solo_numeros['INTERVALO'].value_counts(normalize=True).sort_index() * 100)
