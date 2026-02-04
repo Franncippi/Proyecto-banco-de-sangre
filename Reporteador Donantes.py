@@ -12,3 +12,12 @@ print(df.head())
 # 3. Información básica de las columnas
 print("\nInformación del dataset:")
 print(df.info())
+
+# 1. Eliminar columnas que están 100% vacías
+df = df.dropna(axis=1, how='all')
+
+# Esto borra automáticamente todas las columnas que no tienen ni un solo dato
+df = df.dropna(axis=1, how='all')
+
+# Ahora veamos cuántas columnas nos quedaron
+print(f"Ahora el dataset tiene {df.shape[1]} columnas en lugar de 31.")
