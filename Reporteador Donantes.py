@@ -87,3 +87,13 @@ print(frecuencias)
 # 5. Opcional: Ver el porcentaje (muy útil para tu diplomatura)
 print("\nPorcentaje por intervalo (%):")
 print(df_solo_numeros['INTERVALO'].value_counts(normalize=True).sort_index() * 100)
+
+# 1. Creamos un nuevo DataFrame filtrando por el intervalo deseado
+df_intervalo_bajo = df_solo_numeros[df_solo_numeros['INTERVALO'] == '(1-2]'].copy()
+
+# 2. Verificamos cuántos registros quedaron
+print(f"Total de registros en el intervalo '(1-2]': {len(df_intervalo_bajo)}")
+
+# 3. Mostramos las primeras filas para confirmar
+print("Vista previa de los datos filtrados:")
+print(df_intervalo_bajo[['SEXO', 'EDADORDEN', 'RESULTADO_NUMERICO']].head())
